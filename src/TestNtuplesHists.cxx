@@ -11,13 +11,18 @@ using namespace uhh2examples;
 TestNtuplesHists::TestNtuplesHists(Context & ctx, const string & dirname): Hists(ctx, dirname){
   // book all histograms here
   // jets
-  book<TH1F>("N_jets", "N_{jets}", 20, 0, 20);  
+  book<TH1F>("N_jets", "N_{jets}", 20, 0, 20);
   book<TH1F>("eta_jet1", "#eta^{jet 1}", 40, -2.5, 2.5);
   book<TH1F>("eta_jet2", "#eta^{jet 2}", 40, -2.5, 2.5);
   book<TH1F>("eta_jet3", "#eta^{jet 3}", 40, -2.5, 2.5);
   book<TH1F>("eta_jet4", "#eta^{jet 4}", 40, -2.5, 2.5);
 
   book<TH1I>("flavor_jet1", "flavor^{jet 1}", 100, 0, 100);
+
+  book<TH1F>("pt_jet1", "p_{T}^{jet 1} [GeV/c]", 40, 0, 200);
+  book<TH1F>("pt_jet2", "p_{T}^{jet 2} [GeV/c]", 40, 0, 200);
+  book<TH1F>("pt_jet3", "p_{T}^{jet 3} [GeV/c]", 40, 0, 200);
+  book<TH1F>("pt_jet4", "p_{T}^{jet 4} [GeV/c]", 40, 0, 200);
 
   // leptons
   book<TH1F>("N_mu", "N^{#mu}", 10, 0, 10);
@@ -35,26 +40,30 @@ void TestNtuplesHists::fill(const Event & event){
   // 'hist' is used here a lot for simplicity, but it will be rather
   // slow when you have many histograms; therefore, better
   // use histogram pointers as members as in 'UHH2/common/include/ElectronHists.h'
-  
+
   // Don't forget to always use the weight when filling.
   double weight = event.weight;
-  
+
   std::vector<Jet>* jets = event.jets;
   int Njets = jets->size();
   hist("N_jets")->Fill(Njets, weight);
-  
+
   if(Njets>=1){
     hist("eta_jet1")->Fill(jets->at(0).eta(), weight);
     hist("flavor_jet1")->Fill(fabs(jets->at(0).pdgId()), weight);
+    hist("pt_jet1")->Fill(jets->at(0).pt(), weight);
   }
   if(Njets>=2){
     hist("eta_jet2")->Fill(jets->at(1).eta(), weight);
+    hist("pt_jet2")->Fill(jets->at(1).pt(), weight);
   }
   if(Njets>=3){
     hist("eta_jet3")->Fill(jets->at(2).eta(), weight);
+    hist("pt_jet3")->Fill(jets->at(2).pt(), weight);
   }
   if(Njets>=4){
     hist("eta_jet4")->Fill(jets->at(3).eta(), weight);
+    hist("pt_jet4")->Fill(jets->at(3).pt(), weight);
   }
 
   int Nmuons = event.muons->size();
@@ -64,7 +73,7 @@ void TestNtuplesHists::fill(const Event & event){
       hist("eta_mu")->Fill(thismu.eta(), weight);
       hist("reliso_mu")->Fill(thismu.relIso(), weight);
   }
-  
+
   int Npvs = event.pvs->size();
   hist("N_pv")->Fill(Npvs, weight);
 }
