@@ -72,6 +72,7 @@ namespace uhh2examples {
     common->disable_mcpileupreweight();
     common->disable_metfilters();
     common->disable_jec();
+    common->disable_lumisel();
 
     common->init(ctx);
     jetcleaner.reset(new JetCleaner(ctx, 30.0, 2.4));
