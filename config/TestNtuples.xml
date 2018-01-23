@@ -8,15 +8,15 @@
 
   <Cycle Name="uhh2::AnalysisModuleRunner" OutputDirectory="./" PostFix="" TargetLumi="1" >
     <!-- <Cycle Name="uhh2::AnalysisModuleRunner"  RunMode="PROOF" ProofServer="lite://"  ProofWorkDir="/nfs/dust/cms/user/ottjoc/proof-wd/" ProofNodes="2" OutputDirectory="./" PostFix="" TargetLumi="1" >  -->
-    <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="JetHT" Cacheable="False">
+    <InputData Lumi="1" NEventsMax="-1" Type="DATA" Version="JetHT_3" Cacheable="False">
       <!-- set YOUR input file here -->
-      <In FileName="/nfs/dust/cms/user/karavdia/CMSSW_9_4_1/src/UHH2/core/python/Ntuple_DATA.root" Lumi="0.0"/>
+      <In FileName="/nfs/dust/cms/user/amalara/WorkingArea/File/Ntuples/Data/Ntuple_Data.root" Lumi="0.0"/>
       <InputTree Name="AnalysisTree" />
     </InputData>
 
-    <InputData Lumi="1" NEventsMax="-1" Type="MC" Version="QCD" Cacheable="False">
+    <InputData Lumi="1" NEventsMax="-1" Type="MC" Version="QCD_3" Cacheable="False">
       <!-- set YOUR input file here -->
-      <In FileName="/nfs/dust/cms/user/karavdia/CMSSW_9_4_1/src/UHH2/core/python/Ntuple_MC.root" Lumi="0.0"/>
+      <In FileName="/nfs/dust/cms/user/amalara/WorkingArea/File/Ntuples/MC/Ntuple_MC.root" Lumi="0.0"/>
       <!-- <In FileName="/nfs/dust/cms/user/zoiirene/UpgradeStudiesGtoWW/framework93X/new932/VBF_BulkGravToWW_narrow_M-2000_14TeV_PhaseIITDRFall17_noPU/Ntuple_AK8_18.root" Lumi="0.0"/> -->
       <InputTree Name="AnalysisTree" />
       <!-- uncomment to write tree of selected events, i.e. of those events for which the AnalysisModule::process method  returns true
@@ -65,7 +65,7 @@
       <Item Name="readTrigger" Value="false" />
     -->
     <!-- set YOUR lumi file -->
-    <Item Name="lumi_file" Value="/nfs/dust/cms/user/karavdia/CMSSW_9_4_1/src/UHH2/common/data/Cert_294927-304507_13TeV_PromptReco_Collisions17_JSON.root"/>
+    <!-- <Item Name="lumi_file" Value="/nfs/dust/cms/user/karavdia/CMSSW_9_4_1/src/UHH2/common/data/Cert_294927-304507_13TeV_PromptReco_Collisions17_JSON.root"/> -->
     <!-- some dummy pile-up distributions -->
     <!-- <Item Name="pileup_directory_data"      Value="/nfs/dust/cms/user/karavdia/CMSSW_9_4_1/src/UHH2/common/data/MyDataPileupHistogram.root"/>
     <Item Name="pileup_directory_data_up"   Value="/nfs/dust/cms/user/karavdia/CMSSW_9_4_1/src/UHH2/common/data/MyDataPileupHistogram_72383.root"/>
@@ -85,12 +85,15 @@
 
     <!-- configuration for JetEnergyCorrection: -->
     <!-- See JetCorrection.cxx -->
-    <Item Name="JEC_Data" Value= "JECDatabase/textFiles/Summer16_03Feb2017H_V6_DATA/Summer16_03Feb2017H_V6_DATA_L1RC_AK4PFchs.txt" /> <!--no distinction for different Run -->
+    <!--no distinction for different Run -->
+    <Item Name="JEC_Data" Value= "JECDatabase/textFiles/Summer16_03Feb2017H_V6_DATA/Summer16_03Feb2017H_V6_DATA_L1FastJet_AK4PFchs.txt
+      JECDatabase/textFiles/Summer16_03Feb2017H_V6_DATA/Summer16_03Feb2017H_V6_DATA_L2Relative_AK4PFchs.txt
+      JECDatabase/textFiles/Summer16_03Feb2017H_V6_DATA/Summer16_03Feb2017H_V6_DATA_L3Absolute_AK4PFchs.txt" />
+      <!-- JECDatabase/textFiles/Summer16_03Feb2017H_V6_DATA/Summer16_03Feb2017H_V6_DATA_L2L3Residual_AK4PFchs.txt -->
 
-    <Item Name="JEC_MC" Value="JECDatabase/textFiles/Summer16_03Feb2017H_V6_DATA/Summer16_03Feb2017H_V6_DATA_L1FastJet_AK8PFchs.txt
-    JECDatabase/textFiles/Summer16_03Feb2017H_V6_DATA/Summer16_03Feb2017H_V6_DATA_L2Relative_AK8PFchs.txt
-    JECDatabase/textFiles/Summer16_03Feb2017H_V6_DATA/Summer16_03Feb2017H_V6_DATA_L3Absolute_AK8PFchs.txt
-    JECDatabase/textFiles/Summer16_03Feb2017H_V6_DATA/Summer16_03Feb2017H_V6_DATA_L2L3Residual_AK8PFchs.txt" />
+    <Item Name="JEC_MC" Value="JECDatabase/textFiles/Summer16_03Feb2017_V6_MC/Summer16_03Feb2017_V6_MC_L1FastJet_AK4PFchs.txt
+      JECDatabase/textFiles/Summer16_03Feb2017_V6_MC/Summer16_03Feb2017_V6_MC_L2Relative_AK4PFchs.txt
+      JECDatabase/textFiles/Summer16_03Feb2017_V6_MC/Summer16_03Feb2017_V6_MC_L3Absolute_AK4PFchs.txt" />
 
 
     <!-- Some test configuration; see TestNtuplesModule.cxx for how to access it: -->
